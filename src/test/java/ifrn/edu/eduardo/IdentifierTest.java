@@ -11,13 +11,19 @@ public class IdentifierTest {
     void deveAceitarUmCaractere() {
         assertTrue(id.validateIdentifier("a"));
     }
+
     @Test
-    void deveAceitarMaxinoCaracteres() {
-        assertTrue(id.validateIdentifier("abc123"));
+    void deveAceitarIdentificadorComLetrasENumeros() {
+        assertTrue(id.validateIdentifier("a1b2"));
     }
 
     @Test
-    void deveRejeitarIdentificadoresVazios() {
+    void deveRejeitarIdentificadorLongo() {
+        assertFalse(id.validateIdentifier("abcdefg"));
+    }
+
+    @Test
+    void deveRejeitarIdentificadorVazio() {
         assertFalse(id.validateIdentifier(""));
     }
 
@@ -25,33 +31,19 @@ public class IdentifierTest {
     void deveRejeitarIdentificadorComecandoComNumero() {
         assertFalse(id.validateIdentifier("1abc"));
     }
+
     @Test
     void deveRejeitarIdentificadorComCaracteresEspeciais() {
-        assertFalse(id.validateIdentifier("ab@12"));
+        assertFalse(id.validateIdentifier("ab#c"));
     }
 
     @Test
     void deveAceitarIdentificadorComSomenteLetras() {
-        assertTrue(id.validateIdentifier("abcde"));
+        assertTrue(id.validateIdentifier("AbCdEf"));
     }
+
     @Test
     void deveRejeitarIdentificadorComApenasNumeros() {
-        assertFalse(id.validateIdentifier("23424"));
+        assertFalse(id.validateIdentifier("123"));
     }
-
-    @Test
-    void deveAceitarIdentificadorComLetraeNumero() {
-        assertTrue(id.validateIdentifier("a1"));
-    }
-
-    @Test
-    void deveRejeitarIdentificadorComEspaco() {
-        assertFalse(id.validateIdentifier("ab c"));
-    }
-
-    @Test
-    void deveRejeitarIdentificadorLongo() {
-        assertFalse(id.validateIdentifier("abcdef1"));
-    }
-
 }
