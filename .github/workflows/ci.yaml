@@ -14,9 +14,6 @@ jobs:
       - name: Checkout do código
         uses: actions/checkout@v3
 
-      - name: Dar permissão de execução ao mvnw
-        run: chmod +x ./mvnw
-
       - name: Configurar Java
         uses: actions/setup-java@v3
         with:
@@ -32,10 +29,10 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: Rodar testes
-        run: ./mvnw clean test
+        run: mvn clean test
 
       - name: Gerar relatório Surefire HTML
-        run: ./mvnw surefire-report:report
+        run: mvn surefire-report:report
 
       - name: Publicar relatórios como artefatos
         uses: actions/upload-artifact@v4
@@ -44,4 +41,5 @@ jobs:
           path: |
             target/site/surefire-report.html
             target/surefire-reports/
+
 
